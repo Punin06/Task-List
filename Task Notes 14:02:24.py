@@ -3,13 +3,15 @@ import tkinter as tk
 from tkinter import messagebox
 
 #creating database
-conn = sqlite3.connect("data.db") #need to establish a connection first
-cursor = conn.cursor() #need a cursor to interact with objects
+conn = sqlite3.connect("data.db") #establishing a connection 
+cursor = conn.cursor() #creating cursor to interact with objects
 
-conn.execute( 'CREATE TABLE IF NOT EXISTS note(id INT, content text) ') #creates a table named note if it doesn't exists
+#using execute to run sql statement to create a table named note if it doesn't exist
+conn.execute( 'CREATE TABLE IF NOT EXISTS note(id INT, content text) ') 
+#storing sql query here, for future use.
 query = '''INSERT INTO note (id, content) VALUES(?,?)'''
-#execute is used to run sql statements
-#after execution comes commit which implements the changes made
+
+
 
 #function to add tasks and display current tasks
 def add():
@@ -66,7 +68,7 @@ def delete():
         #displaying leftover tasks
         for n in range ((listbox.size())):
             tasks += (listbox.get(n)) + "\n"
-
+        #displaying the tasks left
         label4["text"] = tasks
     
 window = tk.Tk()
@@ -104,6 +106,7 @@ listbox = tk.Listbox()
 listbox.pack(fill = tk.BOTH, expand = True)
 
 window.mainloop()
-conn.close()#need to close a connection when done
+#closing connection
+conn.close()
 
 
